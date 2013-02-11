@@ -37,7 +37,11 @@ namespace CumulusChat {
         public async void Init(MessageReceived messageReceivedHandler) {
             this.random = new Random();
 
-            ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.AutoDetect;
+            //ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.AutoDetect;
+            
+            // Tcp mode does not work when I run in a VM (VirtualBox) and the host 
+            // is using a wireless connection. Hard coding to Http.
+            ServiceBusEnvironment.SystemConnectivity.Mode = ConnectivityMode.Http;
 
             string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
             this.factory = MessagingFactory.CreateFromConnectionString(connectionString);
@@ -49,7 +53,7 @@ namespace CumulusChat {
 
             this.subscriptionName = Guid.NewGuid().ToString();
 
-            // Not needed, it's a GUID
+            // Not needed really, it's a GUID...
             if (!namespaceManager.SubscriptionExists(topicName, subscriptionName)) {
                 namespaceManager.CreateSubscription(topicName, subscriptionName);
             }
@@ -63,6 +67,10 @@ namespace CumulusChat {
             }
         }
 
+        /// <summary>
+        /// Synchronous (blocking)
+        /// </summary>
+        /// <returns></returns>
         private string ReceiveMessage() {
 
             BrokeredMessage brokeredMessage = this.subClient.Receive();
@@ -108,6 +116,10 @@ namespace CumulusChat {
             return t;
         }
 
+        /// <summary>
+        /// Synchronous (blocking)
+        /// </summary>
+        /// <param name="message"></param>
         public void SendMessage(string message) {
             this.topicClient.Send(new BrokeredMessage(message));
         }

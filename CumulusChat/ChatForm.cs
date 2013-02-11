@@ -49,9 +49,20 @@ namespace CumulusChat {
             this.messageHistory.ScrollToCaret();
         }
 
-        private void ChatForm_FormClosing(object sender, FormClosingEventArgs e) {
-            this.chatApplication.Dispose();
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
+                if (components != null) {
+                    components.Dispose();
+                }
+                if (this.chatApplication != null) {
+                    this.chatApplication.Dispose();
+                }
+            }
+            base.Dispose(disposing);
         }
-
     }
 }
