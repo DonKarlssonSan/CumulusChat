@@ -29,6 +29,7 @@
             this.messageHistory.Location = new System.Drawing.Point(5, 38);
             this.messageHistory.Multiline = true;
             this.messageHistory.Name = "messageHistory";
+            this.messageHistory.ReadOnly = true;
             this.messageHistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.messageHistory.Size = new System.Drawing.Size(432, 218);
             this.messageHistory.TabIndex = 2;
@@ -86,7 +87,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ChatForm";
             this.Text = "CumulusChat";
-
             this.ResumeLayout(false);
             this.PerformLayout();
 
