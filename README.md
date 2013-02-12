@@ -28,3 +28,9 @@ Cloud icon by Emey87 (http://emey87.deviantart.com/) released under CC BY-ND 3.0
 * The synchronous (blocking) method `TopicClient.Send` is used for sending the chat message.
 * A `SubscriptionClient` is created for receiving messages
 * An infinite loop is started for receiving messages, by using asynchronous await the application is not blocked - the GUI is still responsive.
+
+# Usage #
+* Copy your connections string from Azure Management Portal
+* Paste into App.config
+* Start two instances of CumulusChat and start talking to your self =)
+ 
